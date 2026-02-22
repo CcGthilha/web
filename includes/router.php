@@ -14,10 +14,10 @@ const INDEX_ROUNTE = 'home';
 // ฟังชันสำหรับทำให้ URI ที่ร้องขอเข้ามาอยู่ในรูปแบบมาตรฐาน
 function normalizeUri(string $uri): string
 {
-    // ลบเครื่องหมาย '/' ที่อยู่ข้างหน้าและข้างหลังออก และแปลงเป็นตัวพิมพ์เล็ก
+    // แยกเอาเฉพาะ path ก่อนเครื่องหมาย ?
+    $uri = explode('?', $uri)[0]; 
+    
     $uri = strtolower(trim($uri, '/'));
-
-    // เช็คว่า URI ว่างหรือไม่ ถ้าว่างให้เปลี่ยนเป็น route เริ่มต้น
     return $uri == INDEX_URI ? INDEX_ROUNTE : $uri;
 }
 
