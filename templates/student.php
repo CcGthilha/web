@@ -5,7 +5,10 @@
 <body>
     <?php include 'headerstd.php' ?>
     <main>
-        <h1><?= $data['title'] ?></h1>
+        <?php
+        $row = $data['result']->fetch_assoc(); // ดึงข้อมูลออกมาเก็บในตัวแปร $row
+        ?>
+        <h1><?= $data['title'] ?> <?= $row ? $row['first_name'] : 'ไม่พบชื่อ' ?></h1>
     </main>
     <?php include 'footer.php' ?>
 </body>

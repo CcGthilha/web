@@ -8,25 +8,25 @@ function getStudents(): mysqli_result|bool
     $stmt->bind_param('i', $_SESSION['student_id']);
     $stmt->execute();
     $result = $stmt->get_result();
-    $conn->close();
+    // ห้ามมี $conn->close(); ตรงนี้เด็ดขาด
     return $result;
 }
 
-function checkLogin(string $email, string $password): bool
+function checkLogin(string $email, string $password): array|null
 {
     global $conn;
-    $sql = 'select password from students where email = ?';
+    $sql = 'select * from students where email = ?'; // ดึงข้อมูลทั้งหมดมา
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('s', $email);
     $stmt->execute();
     $result = $stmt->get_result();
     if ($result && $result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    if (password_verify($password, $row['password'])) {
-        return $row; // คืนค่าข้อมูลทั้งหมดของนักเรียน (รวมถึง student_id)
+        $row = $result->fetch_assoc();
+        if (password_verify($password, $row['password'])) {
+            return $row; // คืนค่าเป็น array ของข้อมูลนักเรียน
+        }
     }
-}
-    return false;
+    return null;
 }
 
 function getStudentById(int $id): mysqli_result|bool

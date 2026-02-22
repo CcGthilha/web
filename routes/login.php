@@ -5,16 +5,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    $user = checkLogin($username, $password); // รับค่า array ข้อมูลผู้ใช้มาเก็บไว้
+    $user = checkLogin($username, $password); // เรียกใช้ฟังก์ชันที่แก้ใหม่
     if ($user) {
-        $unix_timestamp = time();
-        $_SESSION['timestamp'] = $unix_timestamp;
-        $_SESSION['student_id'] = $user['student_id']; // <--- เพิ่มบรรทัดนี้เพื่อเก็บ ID
+        $_SESSION['timestamp'] = time();
+        $_SESSION['student_id'] = $user['student_id']; // บันทึก ID ลง Session ตรงนี้
         header('Location: /student');
         exit;
     } else {
         renderView('login', ['error' => 'อีเมลหรือรหัสผ่านไม่ถูกต้อง']);
     }
+
 } else {
     renderView('login', ['title' => 'เข้าสู่ระบบ']);
 }
