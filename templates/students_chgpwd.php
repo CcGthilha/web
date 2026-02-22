@@ -3,7 +3,7 @@
 <head></head>
 
 <body>
-    <?php include 'header.php' ?>
+    <?php include 'headerstd.php' ?>
 
     <!-- ส่วนแสดงผลหลักของหน้า -->
     <main>

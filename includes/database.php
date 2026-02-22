@@ -17,3 +17,4 @@ function getConnection(): mysqli
 // database functions ต่างๆ
 require_once DATABASES_DIR . '/students.php';
 require_once DATABASES_DIR . '/courses.php';
+require_once DATABASES_DIR . '/enrollments.php';

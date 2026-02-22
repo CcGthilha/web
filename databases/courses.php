@@ -8,3 +8,5 @@ function getCourses(): mysqli_result|bool
     $conn->close();
     return $result;
 }
+
+
