@@ -5,9 +5,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    if (checkLogin($username, $password)) {
+    $user = checkLogin($username, $password); // รับค่า array ข้อมูลผู้ใช้มาเก็บไว้
+    if ($user) {
         $unix_timestamp = time();
         $_SESSION['timestamp'] = $unix_timestamp;
+        $_SESSION['student_id'] = $user['student_id']; // <--- เพิ่มบรรทัดนี้เพื่อเก็บ ID
         header('Location: /student');
         exit;
     } else {

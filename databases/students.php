@@ -21,9 +21,11 @@ function checkLogin(string $email, string $password): bool
     $stmt->execute();
     $result = $stmt->get_result();
     if ($result && $result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        return password_verify($password, $row['password']);
+    $row = $result->fetch_assoc();
+    if (password_verify($password, $row['password'])) {
+        return $row; // คืนค่าข้อมูลทั้งหมดของนักเรียน (รวมถึง student_id)
     }
+}
     return false;
 }
 
